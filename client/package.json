@@ -1,0 +1,71 @@
+{
+  "name": "route-planner",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@mapbox/polyline": "^1.1.1",
+    "@reduxjs/toolkit": "^1.8.1",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.1.1",
+    "@testing-library/user-event": "^14.1.1",
+    "@turf/bbox": "^6.5.0",
+    "@types/jest": "^24.9.1",
+    "@types/node": "^12.20.48",
+    "@types/react-redux": "^7.1.24",
+    "graphql": "^16.3.0",
+    "hsl-map-style": "github:HSLdevcom/hsl-map-style",
+    "lodash": "^4.17.21",
+    "mapbox-gl": "^2.8.1",
+    "mapbox-gl-leaflet": "^0.0.15",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-map-gl": "^7.0.10",
+    "react-redux": "^7.2.8",
+    "react-scripts": "5.0.1",
+    "react-select": "^5.3.0",
+    "typescript": "~4.1.5",
+    "urql": "^2.2.0",
+    "uuid": "^8.3.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "generate": "graphql-codegen --config codegen.yml"
+  },
+  "eslintConfig": {},
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^2.6.2",
+    "@graphql-codegen/introspection": "2.1.1",
+    "@graphql-codegen/typed-document-node": "^2.2.8",
+    "@graphql-codegen/typescript": "2.4.8",
+    "@graphql-codegen/typescript-operations": "2.3.5",
+    "@types/lodash": "^4.14.182",
+    "@types/mapbox__polyline": "^1.0.2",
+    "@types/react": "^18.0.5",
+    "@types/react-dom": "^18.0.1",
+    "@types/uuid": "^8.3.4",
+    "@typescript-eslint/eslint-plugin": "^5.19.0",
+    "@typescript-eslint/parser": "^5.19.0",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.29.4",
+    "eslint-plugin-react-hooks": "^4.4.0"
+  }
+}

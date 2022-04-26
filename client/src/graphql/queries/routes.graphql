@@ -1,0 +1,77 @@
+# query to get stops
+
+query stop($id: String!) {
+  stop(id: $id) {
+    name
+    lat
+    lon
+  }
+}
+
+# plan query
+
+# { lat: 60.19775, lon: 24.94053 }
+# { lat: 60.18840, lon: 25.00744 }
+
+query routes($from: InputCoordinates!, $to: InputCoordinates!) {
+  plan(from: $from, to: $to) {
+    itineraries {
+      walkDistance
+      duration
+      legs {
+        route {
+          gtfsId
+        }
+        mode
+        startTime
+        endTime
+        from {
+          lat
+          lon
+          name
+          stop {
+            lat
+            lon
+            code
+            name
+            gtfsId
+            vehicleMode
+            stoptimesForPatterns(omitNonPickups: true, timeRange: 1800) {
+              pattern {
+                code
+              }
+              stoptimes {
+                scheduledDeparture
+              }
+            }
+          }
+        }
+        to {
+          lat
+          lon
+          name
+          stop {
+            lat
+            lon
+            name
+            vehicleMode
+            patterns {
+              code
+            }
+          }
+        }
+        trip {
+          gtfsId
+          pattern {
+            code
+          }
+          tripHeadsign
+        }
+        legGeometry {
+          length
+          points
+        }
+      }
+    }
+  }
+}
