@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { CombinedError } from 'urql';
 import { v4 as uuid } from 'uuid';
 import { AppThunk, RootState } from '../../app/store';
 import { InputCoordinates, Itinerary, Plan } from '../../graphql/graphql';
@@ -7,7 +6,9 @@ import { getRoutes } from '../../services/routes';
 
 export type ItineraryWithID = Itinerary & { id: string };
 
-type ErrorType = 'network' | 'graphQL' | 'noData' | 'other';
+const errorTypes = ['network', 'graphQL', 'noData', 'other'] as const;
+type ErrorTypesTuple = typeof errorTypes;
+export type ErrorType = ErrorTypesTuple[number];
 
 type SimplifiedError = {
   type: ErrorType;
@@ -15,7 +16,7 @@ type SimplifiedError = {
 };
 
 type RoutesState = {
-  error?: SimplifiedError;
+  error?: SimplifiedError | null;
   selected?: string | null;
   itineraries: ItineraryWithID[];
 };
@@ -36,8 +37,12 @@ export const routesSlice = createSlice({
     select: (state, action: PayloadAction<string | null>) => {
       state.selected = action.payload;
     },
-    error: (state, action: PayloadAction<SimplifiedError>) => {
-      state.error = action.payload;
+    error: (state, action: PayloadAction<SimplifiedError | null>) => {
+      if (action.payload) {
+        /* prettier-ignore */
+        if (errorTypes.includes(action.payload.type)) state.error = action.payload;
+        else state.error = { ...action.payload, type: 'other' };
+      } else state.error = action.payload;
     },
   },
 });

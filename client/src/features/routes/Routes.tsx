@@ -5,6 +5,7 @@ import ItineraryContainer from './ItineraryContainer';
 import {
   fetchRoutes,
   select as selectRoute,
+  error as setError,
   selectError,
   selectItinearies,
 } from './routesSlice';
@@ -12,7 +13,7 @@ import {
 function Routes() {
   const dispatch = useAppDispatch();
   const [sel, setSel] = useState<string>('');
-  const [message, setMessage] = useState<string>('');
+  const [message, setMessage] = useState<string | null>(null);
 
   const itineraries = useAppSelector(selectItinearies);
   const mapData = useAppSelector(selectMapData);
@@ -21,6 +22,7 @@ function Routes() {
   useEffect(() => {
     const coords = mapData.coordinates;
     if (coords.from) {
+      dispatch(setError(null));
       dispatch(selectRoute(null));
       dispatch(fetchRoutes(coords.from, coords.to));
     }
@@ -31,7 +33,10 @@ function Routes() {
   }, [sel]);
 
   useEffect(() => {
-    if (error && error.type === 'noData') setMessage(error.message);
+    if (error) {
+      if (error.type === 'noData') setMessage(error.message);
+      else setMessage('Something went wrong...');
+    } else setMessage(null);
   }, [error]);
 
   const handleClick = (id: string) => setSel(id);

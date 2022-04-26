@@ -1,0 +1,1 @@
+{"geocoding":{"version":"0.2","attribution":"http://pelias-api:8080/attribution","query":{"size":10,"private":false,"lang":"fi","querySize":90},"warnings":["Invalid Parameter: te"],"errors":["invalid param 'text': text must have alphanumeric content"],"engine":{"name":"Pelias","author":"Mapzen","version":"1.0"},"timestamp":1650994430112},"type":"FeatureCollection","features":[]}

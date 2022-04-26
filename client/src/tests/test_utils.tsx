@@ -2,8 +2,8 @@ import { render, RenderOptions } from '@testing-library/react';
 import React, { ReactElement } from 'react';
 import { Provider } from 'react-redux';
 import { Provider as GraphQlProvider } from 'urql';
-import { store } from '../src/app/store';
-import client from '../src/app/client';
+import { store } from '../app/store';
+import client from '../app/client';
 
 function AllTheProviders({ children }) {
   return (

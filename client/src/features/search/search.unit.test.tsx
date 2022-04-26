@@ -2,14 +2,14 @@ import '@testing-library/jest-dom/extend-expect';
 import { Query, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
-import { render } from '../../../tests/test-utils';
+import { render } from '../../tests/test_utils';
 import { searchForAddress } from '../../services/search';
 import Search from './Search';
 
 // mock calls to the api
-jest.mock('../../services/map', () => ({ searchForAddress: jest.fn() }));
+jest.mock('../../services/search', () => ({ searchForAddress: jest.fn() }));
 
-describe('Search', () => {
+describe('Search unit tests', () => {
   beforeEach(() => {
     (searchForAddress as jest.Mock).mockResolvedValue({
       features: [

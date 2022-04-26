@@ -1,0 +1,764 @@
+{
+  "data": {
+    "plan": {
+      "itineraries": [
+        {
+          "walkDistance": 692.0116153987234,
+          "duration": 1277,
+          "legs": [
+            {
+              "route": null,
+              "mode": "WALK",
+              "startTime": 1651000012000,
+              "endTime": 1651000461000,
+              "from": {
+                "lat": 60.19775,
+                "lon": 24.94053,
+                "name": "Origin",
+                "stop": null
+              },
+              "to": {
+                "lat": 60.197981,
+                "lon": 24.933994,
+                "name": "Pasilan asema",
+                "stop": {
+                  "lat": 60.197981,
+                  "lon": 24.933994,
+                  "name": "Pasilan asema",
+                  "vehicleMode": "BUS",
+                  "patterns": [
+                    {
+                      "code": "HSL:4518:0:01"
+                    },
+                    {
+                      "code": "HSL:1500:1:01"
+                    },
+                    {
+                      "code": "HSL:1059:1:01"
+                    },
+                    {
+                      "code": "HSL:2510:1:01"
+                    }
+                  ]
+                }
+              },
+              "trip": null,
+              "legGeometry": {
+                "length": 41,
+                "points": "{jlnJydfwCSFUH?D?D@BWHC@AJqAd@KJER?PHfAJlB@F?NB\\Bb@PtCDn@NrCBL?BBP@PRdD@TJHB`@@T@D@P@R@J?H?F?BBXC?@hA"
+              }
+            },
+            {
+              "route": {
+                "gtfsId": "HSL:2510"
+              },
+              "mode": "BUS",
+              "startTime": 1651000461000,
+              "endTime": 1651001065000,
+              "from": {
+                "lat": 60.197981,
+                "lon": 24.933994,
+                "name": "Pasilan asema",
+                "stop": {
+                  "lat": 60.197981,
+                  "lon": 24.933994,
+                  "code": "H2100",
+                  "name": "Pasilan asema",
+                  "gtfsId": "HSL:1174128",
+                  "vehicleMode": "BUS",
+                  "stoptimesForPatterns": [
+                    {
+                      "pattern": {
+                        "code": "HSL:1500:1:01"
+                      },
+                      "stoptimes": [
+                        {
+                          "scheduledDeparture": 80520
+                        }
+                      ]
+                    },
+                    {
+                      "pattern": {
+                        "code": "HSL:1059:1:01"
+                      },
+                      "stoptimes": [
+                        {
+                          "scheduledDeparture": 79860
+                        },
+                        {
+                          "scheduledDeparture": 81120
+                        }
+                      ]
+                    },
+                    {
+                      "pattern": {
+                        "code": "HSL:2510:1:01"
+                      },
+                      "stoptimes": [
+                        {
+                          "scheduledDeparture": 79920
+                        },
+                        {
+                          "scheduledDeparture": 81120
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "to": {
+                "lat": 60.18864,
+                "lon": 25.01154,
+                "name": "Tupasaari",
+                "stop": {
+                  "lat": 60.18864,
+                  "lon": 25.01154,
+                  "name": "Tupasaari",
+                  "vehicleMode": "BUS",
+                  "patterns": [
+                    {
+                      "code": "HSL:1097N:0:01"
+                    },
+                    {
+                      "code": "HSL:1085N:0:01"
+                    },
+                    {
+                      "code": "HSL:1092N:0:01"
+                    },
+                    {
+                      "code": "HSL:1096N:0:01"
+                    },
+                    {
+                      "code": "HSL:1090A:0:01"
+                    },
+                    {
+                      "code": "HSL:1500:1:01"
+                    },
+                    {
+                      "code": "HSL:1090N:0:01"
+                    },
+                    {
+                      "code": "HSL:1094N:0:01"
+                    },
+                    {
+                      "code": "HSL:1095N:0:01"
+                    },
+                    {
+                      "code": "HSL:1087N:0:01"
+                    },
+                    {
+                      "code": "HSL:9841N:0:01"
+                    },
+                    {
+                      "code": "HSL:2510:1:01"
+                    }
+                  ]
+                }
+              },
+              "trip": {
+                "gtfsId": "HSL:2510_20220425_Ti_2_2144",
+                "pattern": {
+                  "code": "HSL:2510:1:01"
+                },
+                "tripHeadsign": "Herttoniemi (M)"
+              },
+              "legGeometry": {
+                "length": 100,
+                "points": "illnJc~dwCMwAMk@t@YZIpG}B^Mr@Wj@Ab@@AeBDqB@wA@g@DSLc@n@mBHo@Hi@tAkEj@eB`@_Af@}A~@cDbBiFdByFPc@hCiItEuNd@uARg@Nw@VcAZgA`@{AZuAVyAN_ALqAH}@DQFcA@WF}ADcAB}@@q@@kA?yA?g@?U?_A?eK?yCAgG?wE{@s@PyCP}CZeE\\oEReCn@oIr@}JDc@PuBRyAX_B`@gB~@yEjBaSrBg`@JcCb@sHdAuRt@gMNkENmG?{CEaDIiDMeDYkFQkCm@}F]qCSuAg@gDoAaGcAqEc@mBq@_Eg@oEe@qF_@gGO_EKeDI{DIoCK{D"
+              }
+            },
+            {
+              "route": null,
+              "mode": "WALK",
+              "startTime": 1651001065000,
+              "endTime": 1651001289000,
+              "from": {
+                "lat": 60.18864,
+                "lon": 25.01154,
+                "name": "Tupasaari",
+                "stop": {
+                  "lat": 60.18864,
+                  "lon": 25.01154,
+                  "code": "H4003",
+                  "name": "Tupasaari",
+                  "gtfsId": "HSL:1420117",
+                  "vehicleMode": "BUS",
+                  "stoptimesForPatterns": [
+                    {
+                      "pattern": {
+                        "code": "HSL:1500:1:01"
+                      },
+                      "stoptimes": [
+                        {
+                          "scheduledDeparture": 79920
+                        },
+                        {
+                          "scheduledDeparture": 81120
+                        }
+                      ]
+                    },
+                    {
+                      "pattern": {
+                        "code": "HSL:2510:1:01"
+                      },
+                      "stoptimes": [
+                        {
+                          "scheduledDeparture": 80520
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "to": {
+                "lat": 60.1884,
+                "lon": 25.00744,
+                "name": "Destination",
+                "stop": null
+              },
+              "trip": null,
+              "legGeometry": {
+                "length": 30,
+                "points": "arjnJkatwCA]?A@EB??D@P@BDB@TH\\BNHZJx@LtADRAjDBf@Bj@Hh@F^@BJb@CNAHARAd@?h@BZ@N"
+              }
+            }
+          ]
+        },
+        {
+          "walkDistance": 380.4892307748878,
+          "duration": 1242,
+          "legs": [
+            {
+              "route": null,
+              "mode": "WALK",
+              "startTime": 1651000295000,
+              "endTime": 1651000338000,
+              "from": {
+                "lat": 60.19775,
+                "lon": 24.94053,
+                "name": "Origin",
+                "stop": null
+              },
+              "to": {
+                "lat": 60.198037,
+                "lon": 24.940327,
+                "name": "Asemapäällikönkatu",
+                "stop": {
+                  "lat": 60.198037,
+                  "lon": 24.940327,
+                  "name": "Asemapäällikönkatu",
+                  "vehicleMode": "BUS",
+                  "patterns": [
+                    {
+                      "code": "HSL:4518:0:01"
+                    },
+                    {
+                      "code": "HSL:1059:1:01"
+                    }
+                  ]
+                }
+              },
+              "trip": null,
+              "legGeometry": {
+                "length": 7,
+                "points": "{jlnJydfwCSFUH?D?D@BWH"
+              }
+            },
+            {
+              "route": {
+                "gtfsId": "HSL:1059"
+              },
+              "mode": "BUS",
+              "startTime": 1651000338000,
+              "endTime": 1651000901000,
+              "from": {
+                "lat": 60.198037,
+                "lon": 24.940327,
+                "name": "Asemapäällikönkatu",
+                "stop": {
+                  "lat": 60.198037,
+                  "lon": 24.940327,
+                  "code": "H0662",
+                  "name": "Asemapäällikönkatu",
+                  "gtfsId": "HSL:1173112",
+                  "vehicleMode": "BUS",
+                  "stoptimesForPatterns": [
+                    {
+                      "pattern": {
+                        "code": "HSL:1059:1:01"
+                      },
+                      "stoptimes": [
+                        {
+                          "scheduledDeparture": 79920
+                        },
+                        {
+                          "scheduledDeparture": 81180
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "to": {
+                "lat": 60.187006,
+                "lon": 24.976955,
+                "name": "Kalasatama (M)",
+                "stop": {
+                  "lat": 60.187006,
+                  "lon": 24.976955,
+                  "name": "Kalasatama (M)",
+                  "vehicleMode": "BUS",
+                  "patterns": [
+                    {
+                      "code": "HSL:9738:1:01"
+                    },
+                    {
+                      "code": "HSL:1059:1:01"
+                    }
+                  ]
+                }
+              },
+              "trip": {
+                "gtfsId": "HSL:1059_20220425_Ti_2_2144",
+                "pattern": {
+                  "code": "HSL:1059:1:01"
+                },
+                "tripHeadsign": "Sompasaari"
+              },
+              "legGeometry": {
+                "length": 70,
+                "points": "sllnJqcfwCHGdDiAp@]NQLYDMBQBe@AYCu@?y@E_HpCu@RCT@ZKX{@Ja@Rk@nBqG~A_FvBcHnAqDr@}BhCeHd@gA\\eAvBoIb@kBf@qCd@gCb@mC^iC^{Cr@aGr@wH\\oCPyCP}CZeE\\oEReCf@qCh@kDl@eGZcDNoAJu@IEgBeB[Ye@g@SUcAeA~@eGP{@Ho@F_@Lw@Ny@z@}F^_CTsAr@yEhAb@`@Lh@Z^L\\P"
+              }
+            },
+            {
+              "route": null,
+              "mode": "WALK",
+              "startTime": 1651000901000,
+              "endTime": 1651001000000,
+              "from": {
+                "lat": 60.187006,
+                "lon": 24.976955,
+                "name": "Kalasatama (M)",
+                "stop": {
+                  "lat": 60.187006,
+                  "lon": 24.976955,
+                  "code": "H2564",
+                  "name": "Kalasatama (M)",
+                  "gtfsId": "HSL:1100132",
+                  "vehicleMode": "BUS",
+                  "stoptimesForPatterns": [
+                    {
+                      "pattern": {
+                        "code": "HSL:1059:1:01"
+                      },
+                      "stoptimes": [
+                        {
+                          "scheduledDeparture": 80520
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "to": {
+                "lat": 60.187389,
+                "lon": 24.977068,
+                "name": "Kalasatama",
+                "stop": {
+                  "lat": 60.187389,
+                  "lon": 24.977068,
+                  "name": "Kalasatama",
+                  "vehicleMode": "SUBWAY",
+                  "patterns": [
+                    {
+                      "code": "HSL:31M2M:0:01"
+                    },
+                    {
+                      "code": "HSL:31M2:0:01"
+                    },
+                    {
+                      "code": "HSL:31M1:0:01"
+                    }
+                  ]
+                }
+              },
+              "trip": null,
+              "legGeometry": {
+                "length": 21,
+                "points": "qgjnJghmwCKA_AYIECAAF?JHD?@CZ??B[??CZ??B[???AAAGCB_@"
+              }
+            },
+            {
+              "route": {
+                "gtfsId": "HSL:31M2"
+              },
+              "mode": "SUBWAY",
+              "startTime": 1651001241000,
+              "endTime": 1651001346000,
+              "from": {
+                "lat": 60.187389,
+                "lon": 24.977068,
+                "name": "Kalasatama",
+                "stop": {
+                  "lat": 60.187389,
+                  "lon": 24.977068,
+                  "code": "H0027",
+                  "name": "Kalasatama",
+                  "gtfsId": "HSL:1100601",
+                  "vehicleMode": "SUBWAY",
+                  "stoptimesForPatterns": [
+                    {
+                      "pattern": {
+                        "code": "HSL:31M2:0:01"
+                      },
+                      "stoptimes": [
+                        {
+                          "scheduledDeparture": 79680
+                        },
+                        {
+                          "scheduledDeparture": 80580
+                        },
+                        {
+                          "scheduledDeparture": 81480
+                        }
+                      ]
+                    },
+                    {
+                      "pattern": {
+                        "code": "HSL:31M1:0:01"
+                      },
+                      "stoptimes": [
+                        {
+                          "scheduledDeparture": 80100
+                        },
+                        {
+                          "scheduledDeparture": 81000
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "to": {
+                "lat": 60.188834,
+                "lon": 25.008191,
+                "name": "Kulosaari",
+                "stop": {
+                  "lat": 60.188834,
+                  "lon": 25.008191,
+                  "name": "Kulosaari",
+                  "vehicleMode": "SUBWAY",
+                  "patterns": [
+                    {
+                      "code": "HSL:31M2M:0:01"
+                    },
+                    {
+                      "code": "HSL:31M2:0:01"
+                    },
+                    {
+                      "code": "HSL:31M1:0:01"
+                    }
+                  ]
+                }
+              },
+              "trip": {
+                "gtfsId": "HSL:31M2_20220425_Ti_1_2217",
+                "pattern": {
+                  "code": "HSL:31M2:0:01"
+                },
+                "tripHeadsign": "Mellunmäki"
+              },
+              "legGeometry": {
+                "length": 36,
+                "points": "qjjnJsimwC\\wFToEDq@VeEvCyi@ToEL}BFmBBsBBuB?yA?sBGeDK}FIyCEeBGyAK}AIuAQsBUqBSkBWiBYcB[_Ba@eBu@cD}AiH_@}BWmBa@qDYaDMwBOwDWkF"
+              }
+            },
+            {
+              "route": null,
+              "mode": "WALK",
+              "startTime": 1651001346000,
+              "endTime": 1651001537000,
+              "from": {
+                "lat": 60.188834,
+                "lon": 25.008191,
+                "name": "Kulosaari",
+                "stop": {
+                  "lat": 60.188834,
+                  "lon": 25.008191,
+                  "code": "H0029",
+                  "name": "Kulosaari",
+                  "gtfsId": "HSL:1420601",
+                  "vehicleMode": "SUBWAY",
+                  "stoptimesForPatterns": [
+                    {
+                      "pattern": {
+                        "code": "HSL:31M2:0:01"
+                      },
+                      "stoptimes": [
+                        {
+                          "scheduledDeparture": 79800
+                        },
+                        {
+                          "scheduledDeparture": 80700
+                        },
+                        {
+                          "scheduledDeparture": 81600
+                        }
+                      ]
+                    },
+                    {
+                      "pattern": {
+                        "code": "HSL:31M1:0:01"
+                      },
+                      "stoptimes": [
+                        {
+                          "scheduledDeparture": 80220
+                        },
+                        {
+                          "scheduledDeparture": 81120
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "to": {
+                "lat": 60.1884,
+                "lon": 25.00744,
+                "name": "Destination",
+                "stop": null
+              },
+              "trip": null,
+              "legGeometry": {
+                "length": 15,
+                "points": "gsjnJclswCNlDBp@B^@R@NDAnA[PELEDAPOI]CKKkA"
+              }
+            }
+          ]
+        },
+        {
+          "walkDistance": 692.0116153987234,
+          "duration": 1254,
+          "legs": [
+            {
+              "route": null,
+              "mode": "WALK",
+              "startTime": 1651000571000,
+              "endTime": 1651001020000,
+              "from": {
+                "lat": 60.19775,
+                "lon": 24.94053,
+                "name": "Origin",
+                "stop": null
+              },
+              "to": {
+                "lat": 60.197981,
+                "lon": 24.933994,
+                "name": "Pasilan asema",
+                "stop": {
+                  "lat": 60.197981,
+                  "lon": 24.933994,
+                  "name": "Pasilan asema",
+                  "vehicleMode": "BUS",
+                  "patterns": [
+                    {
+                      "code": "HSL:4518:0:01"
+                    },
+                    {
+                      "code": "HSL:1500:1:01"
+                    },
+                    {
+                      "code": "HSL:1059:1:01"
+                    },
+                    {
+                      "code": "HSL:2510:1:01"
+                    }
+                  ]
+                }
+              },
+              "trip": null,
+              "legGeometry": {
+                "length": 41,
+                "points": "{jlnJydfwCSFUH?D?D@BWHC@AJqAd@KJER?PHfAJlB@F?NB\\Bb@PtCDn@NrCBL?BBP@PRdD@TJHB`@@T@D@P@R@J?H?F?BBXC?@hA"
+              }
+            },
+            {
+              "route": {
+                "gtfsId": "HSL:1500"
+              },
+              "mode": "BUS",
+              "startTime": 1651001020000,
+              "endTime": 1651001601000,
+              "from": {
+                "lat": 60.197981,
+                "lon": 24.933994,
+                "name": "Pasilan asema",
+                "stop": {
+                  "lat": 60.197981,
+                  "lon": 24.933994,
+                  "code": "H2100",
+                  "name": "Pasilan asema",
+                  "gtfsId": "HSL:1174128",
+                  "vehicleMode": "BUS",
+                  "stoptimesForPatterns": [
+                    {
+                      "pattern": {
+                        "code": "HSL:1500:1:01"
+                      },
+                      "stoptimes": [
+                        {
+                          "scheduledDeparture": 80520
+                        }
+                      ]
+                    },
+                    {
+                      "pattern": {
+                        "code": "HSL:1059:1:01"
+                      },
+                      "stoptimes": [
+                        {
+                          "scheduledDeparture": 79860
+                        },
+                        {
+                          "scheduledDeparture": 81120
+                        }
+                      ]
+                    },
+                    {
+                      "pattern": {
+                        "code": "HSL:2510:1:01"
+                      },
+                      "stoptimes": [
+                        {
+                          "scheduledDeparture": 79920
+                        },
+                        {
+                          "scheduledDeparture": 81120
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "to": {
+                "lat": 60.18864,
+                "lon": 25.01154,
+                "name": "Tupasaari",
+                "stop": {
+                  "lat": 60.18864,
+                  "lon": 25.01154,
+                  "name": "Tupasaari",
+                  "vehicleMode": "BUS",
+                  "patterns": [
+                    {
+                      "code": "HSL:1097N:0:01"
+                    },
+                    {
+                      "code": "HSL:1085N:0:01"
+                    },
+                    {
+                      "code": "HSL:1092N:0:01"
+                    },
+                    {
+                      "code": "HSL:1096N:0:01"
+                    },
+                    {
+                      "code": "HSL:1090A:0:01"
+                    },
+                    {
+                      "code": "HSL:1500:1:01"
+                    },
+                    {
+                      "code": "HSL:1090N:0:01"
+                    },
+                    {
+                      "code": "HSL:1094N:0:01"
+                    },
+                    {
+                      "code": "HSL:1095N:0:01"
+                    },
+                    {
+                      "code": "HSL:1087N:0:01"
+                    },
+                    {
+                      "code": "HSL:9841N:0:01"
+                    },
+                    {
+                      "code": "HSL:2510:1:01"
+                    }
+                  ]
+                }
+              },
+              "trip": {
+                "gtfsId": "HSL:1500_20220425_Ti_2_2204",
+                "pattern": {
+                  "code": "HSL:1500:1:01"
+                },
+                "tripHeadsign": "Itäkeskus(M)"
+              },
+              "legGeometry": {
+                "length": 100,
+                "points": "illnJc~dwCMwAMk@t@YZIpG}B^Mr@Wj@Ab@@AeBDqB@wA@g@DSLc@n@mBHo@Hi@tAkEj@eB`@_Af@}A~@cDbBiFdByFPc@hCiItEuNd@uARg@Nw@VcAZgA`@{AZuAVyAN_ALqAH}@DQFcA@WF}ADcAB}@@q@@kA?yA?g@?U?_A?eK?yCAgG?wE{@s@PyCP}CZeE\\oEReCn@oIr@}JDc@PuBRyAX_B`@gB~@yEjBaSrBg`@JcCb@sHdAuRt@gMNkENmG?{CEaDIiDMeDYkFQkCm@}F]qCSuAg@gDoAaGcAqEc@mBq@_Eg@oEe@qF_@gGO_EKeDI{DIoCK{D"
+              }
+            },
+            {
+              "route": null,
+              "mode": "WALK",
+              "startTime": 1651001601000,
+              "endTime": 1651001825000,
+              "from": {
+                "lat": 60.18864,
+                "lon": 25.01154,
+                "name": "Tupasaari",
+                "stop": {
+                  "lat": 60.18864,
+                  "lon": 25.01154,
+                  "code": "H4003",
+                  "name": "Tupasaari",
+                  "gtfsId": "HSL:1420117",
+                  "vehicleMode": "BUS",
+                  "stoptimesForPatterns": [
+                    {
+                      "pattern": {
+                        "code": "HSL:1500:1:01"
+                      },
+                      "stoptimes": [
+                        {
+                          "scheduledDeparture": 79920
+                        },
+                        {
+                          "scheduledDeparture": 81120
+                        }
+                      ]
+                    },
+                    {
+                      "pattern": {
+                        "code": "HSL:2510:1:01"
+                      },
+                      "stoptimes": [
+                        {
+                          "scheduledDeparture": 80520
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "to": {
+                "lat": 60.1884,
+                "lon": 25.00744,
+                "name": "Destination",
+                "stop": null
+              },
+              "trip": null,
+              "legGeometry": {
+                "length": 30,
+                "points": "arjnJkatwCA]?A@EB??D@P@BDB@TH\\BNHZJx@LtADRAjDBf@Bj@Hh@F^@BJb@CNAHARAd@?h@BZ@N"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
