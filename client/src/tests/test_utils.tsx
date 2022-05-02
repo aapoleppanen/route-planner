@@ -5,7 +5,8 @@ import { Provider as GraphQlProvider } from 'urql';
 import { store } from '../app/store';
 import client from '../app/client';
 
-function AllTheProviders({ children }) {
+// eslint-disable-next-line react/prop-types
+function AllTheProviders({ children }: { children: any }) {
   return (
     <GraphQlProvider value={client}>
       <Provider store={store}>{children}</Provider>

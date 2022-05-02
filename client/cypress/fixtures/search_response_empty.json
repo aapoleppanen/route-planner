@@ -1,0 +1,1 @@
+{"geocoding":{"version":"0.2","attribution":"http://pelias-api:8080/attribution","query":{"text":"afsnkjaskjasf","size":10,"private":false,"lang":"fi","querySize":90,"parsed_text":{"name":"afsnkjaskjasf"}},"engine":{"name":"Pelias","author":"Mapzen","version":"1.0"},"timestamp":1650994452859},"type":"FeatureCollection","features":[]}

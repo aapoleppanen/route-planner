@@ -94,6 +94,7 @@ export default function DrawLegs({ legs }: DrawLegsProps) {
             <img
               src={p.url}
               alt="marker_icon"
+              data-testid={p.url}
               style={{
                 width: 15,
                 height: 'auto',

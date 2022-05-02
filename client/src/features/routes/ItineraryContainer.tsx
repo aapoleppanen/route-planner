@@ -1,3 +1,8 @@
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import Icon from '@mui/material/Icon';
+import Collapse from '@mui/material/Collapse';
+import { green, blue, orange } from '@mui/material/colors';
 import React, { useEffect } from 'react';
 import { Leg } from '../../graphql/graphql';
 import { ItineraryWithID } from './routesSlice';
@@ -15,57 +20,102 @@ function ItineraryContainer({
 }) {
   useEffect(() => {}, [sel]);
 
-  const getIcon = (mode: string) => {
-    switch (mode) {
-      case 'WALK':
-        return 'https://www.freeiconspng.com/thumbs/walking-icon/walking-icon-1.png';
-      case 'SUBWAY':
-        return 'https://www.freeiconspng.com/thumbs/walking-icon/walking-icon-1.png';
-      case 'BUS':
-        return 'https://www.freeiconspng.com/thumbs/walking-icon/walking-icon-1.png';
-      case 'TRAM':
-        return 'https://www.freeiconspng.com/thumbs/walking-icon/walking-icon-1.png';
-      default:
-        return 'https://www.freeiconspng.com/thumbs/walking-icon/walking-icon-1.png';
-    }
+  const icons: Record<string, JSX.Element> = {
+    WALK: <Icon>directions_walk</Icon>,
+    TRAM: <Icon sx={{ color: green[500] }}>tram</Icon>,
+    SUBWAY: <Icon sx={{ color: orange[500] }}>subway</Icon>,
+    BUS: <Icon sx={{ color: blue[500] }}>directions_bus</Icon>,
+    DEFAULT: <Icon>directions_walk</Icon>,
+  };
+
+  const timeDiff = (leg: Leg): number =>
+    // eslint-disable-next-line implicit-arrow-linebreak
+    Math.floor(
+      (new Date(leg?.endTime).valueOf() - new Date(leg?.startTime).valueOf()) /
+        1000 /
+        60,
+    );
+
+  const formatTime = (time: number) =>
+    // eslint-disable-next-line implicit-arrow-linebreak
+    new Date(time).toLocaleTimeString([], {
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+
+  const getRouteName = (leg: Leg): string => {
+    if (leg.trip?.routeShortName) return leg.trip.routeShortName;
+    return '';
   };
 
   const handleSelected = (legs: Leg[]) => (
-    <div>
-      {origin}
+    <Grid container spacing={1} direction="column">
+      <Grid item>
+        <Box textAlign="center">
+          {formatTime(legs[0].startTime)} {origin}
+        </Box>
+      </Grid>
       {legs.map((leg) => (
-        <div key={leg?.endTime}>
-          {new Date(leg?.startTime).toLocaleTimeString('fi-FI')}-{leg.mode}
-          <img
-            src={getIcon(leg.mode!)}
-            alt="transp_icon"
-            style={{ width: 15 }}
-          />
-          -{new Date(leg?.endTime).toLocaleTimeString('fi-FI')}
-          {leg.to.name === 'Destination' ? '' : leg.to.name}
-        </div>
+        <Grid item key={leg?.endTime}>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            <Box sx={{ display: 'flex', alignItems: 'center' }} mb={2} mt={2}>
+              <Box sx={{ display: 'flex', flexDirection: 'column' }} mr={2}>
+                {icons[leg.mode!] || icons.DEFAULT}
+                {getRouteName(leg)}
+              </Box>
+              {timeDiff(leg)} min
+            </Box>
+            <Box> {leg.to.name === 'Destination' ? '' : leg.to.name}</Box>
+          </Box>
+        </Grid>
       ))}
-      {destination}
-    </div>
+      <Grid item>
+        <Box textAlign="center">
+          {formatTime(legs[legs.length - 1].endTime)} {destination}
+        </Box>
+      </Grid>
+    </Grid>
   );
 
   const handleNoSelected = (legs: Leg[]) => (
-    <div>
+    <Grid container spacing={0} sx={{ justifyContent: 'space-evenly' }}>
+      <Grid item>
+        <Box>{formatTime(legs[0].startTime)}</Box>
+      </Grid>
       {legs.map((leg) => (
-        <div key={leg?.endTime}>
-          {new Date(leg?.startTime).toLocaleTimeString('fi-FI')}-{leg.mode}-
-          {new Date(leg?.endTime).toLocaleTimeString('fi-FI')}
-        </div>
+        <Grid item key={leg?.endTime}>
+          <Box
+            key={leg?.endTime}
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            {icons[leg.mode!] || icons.DEFAULT}
+            {leg.mode === 'WALK' ? <>{timeDiff(leg)} min</> : getRouteName(leg)}
+          </Box>
+        </Grid>
       ))}
-    </div>
+      <Grid item>
+        <Box>{formatTime(legs[legs.length - 1].endTime)}</Box>
+      </Grid>
+    </Grid>
   );
 
   return (
-    <div>
-      {sel === it.id && it.legs
-        ? handleSelected(it.legs as Leg[])
-        : handleNoSelected(it.legs as Leg[])}
-    </div>
+    <Box data-testId="it_container">
+      <Collapse in={sel === it.id}>{handleSelected(it.legs as Leg[])}</Collapse>
+      <Collapse in={sel !== it.id}>
+        {handleNoSelected(it.legs as Leg[])}
+      </Collapse>
+    </Box>
   );
 }
 

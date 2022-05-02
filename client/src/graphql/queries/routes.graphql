@@ -14,7 +14,7 @@ query stop($id: String!) {
 # { lat: 60.18840, lon: 25.00744 }
 
 query routes($from: InputCoordinates!, $to: InputCoordinates!) {
-  plan(from: $from, to: $to) {
+  plan(from: $from, to: $to, numItineraries: 5) {
     itineraries {
       walkDistance
       duration
@@ -62,6 +62,7 @@ query routes($from: InputCoordinates!, $to: InputCoordinates!) {
         }
         trip {
           gtfsId
+          routeShortName
           pattern {
             code
           }

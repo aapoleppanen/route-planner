@@ -22,7 +22,7 @@ function MapContainer() {
         zoom: 11,
       }}
       reuseMaps
-      style={{ width: '75vw', height: '50vh' }}
+      style={{ width: 'auto', height: '100vh' }}
       mapboxAccessToken={accessToken}
       // mapStyle="https://dev-api.digitransit.fi/map/v2/hsl-vector-map/index.json"
       mapStyle={style}

@@ -36,5 +36,10 @@ module.exports = {
       { props: true, ignorePropertyModificationsForRegex: ['^state'] },
     ],
   },
-  ignorePatterns: ['.eslintrc.js', 'graphql.tsx', 'serviceWorker.ts'],
+  ignorePatterns: [
+    '.eslintrc.js',
+    'graphql.tsx',
+    'serviceWorker.ts',
+    'cypress',
+  ],
 };

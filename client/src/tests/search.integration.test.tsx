@@ -1,3 +1,6 @@
+/* eslint-disable object-curly-newline */
+/* eslint-disable function-paren-newline */
+/* eslint-disable implicit-arrow-linebreak */
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
 import { waitFor } from '@testing-library/react';
@@ -35,7 +38,7 @@ afterAll(() => server.close());
 
 describe('search integration tests', () => {
   test('should render options and they should be selectable', async () => {
-    const { container, findByText, getByText } = render(
+    const { container, findByText, getByText, findAllByText } = render(
       <>
         <Search />
         <Routes />
@@ -46,12 +49,11 @@ describe('search integration tests', () => {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       userEvent.type(container.querySelector('input')!, 'kamppi');
     });
-    await findByText('Kamppi, Kampinkuja 1, Helsinki');
-    expect(getByText('Kamppi, Kampinkuja 1, Helsinki')).toBeDefined();
+    expect(await findByText('Kamppi, Kampinkuja 1, Helsinki')).toBeDefined();
     await waitFor(() => {
       userEvent.click(getByText('Kamppi, Kampinkuja 1, Helsinki'));
     });
-    expect(await findByText(/SUBWAY/)).toBeDefined();
+    expect(await findAllByText(/Pasilan asema/)).toBeDefined();
   });
 
   test('should render appropriate message when no routes are found', async () => {
@@ -66,8 +68,7 @@ describe('search integration tests', () => {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       userEvent.type(container.querySelector('input')!, 'kamppi');
     });
-    await findAllByText('Kamppi, Helsinki');
-    expect(getAllByText('Kamppi, Helsinki')).toBeDefined();
+    expect(await findAllByText('Kamppi, Helsinki')).toBeDefined();
     await waitFor(() => {
       userEvent.click(getAllByText('Kamppi, Helsinki')[0]);
     });

@@ -1,3 +1,7 @@
+import Box from '@mui/material/Box';
+import Divider from '@mui/material/Divider';
+import Collapse from '@mui/material/Collapse';
+import { TransitionGroup } from 'react-transition-group';
 import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { selectMapData } from '../map/mapSlice';
@@ -30,6 +34,7 @@ function Routes() {
 
   useEffect(() => {
     if (sel) dispatch(selectRoute(sel));
+    else dispatch(selectRoute(null));
   }, [sel]);
 
   useEffect(() => {
@@ -39,32 +44,36 @@ function Routes() {
     } else setMessage(null);
   }, [error]);
 
-  const handleClick = (id: string) => setSel(id);
+  const handleClick = (id: string) => setSel(sel === id ? '' : id);
 
   return (
-    <div>
-      <div>
+    <Box mt={2}>
+      <TransitionGroup>
         {message ||
           (itineraries &&
             itineraries.map((i) => (
-              <div
-                onClick={() => handleClick(i.id)}
-                onKeyDown={() => handleClick(i.id)}
-                role="button"
-                tabIndex={0}
-                key={`${i.id}div`}
-              >
-                <ItineraryContainer
-                  it={i}
-                  key={i.id}
-                  sel={sel}
-                  origin={mapData.names.from!}
-                  destination={mapData.names.to!}
-                />
-              </div>
+              <Collapse key={`${i.id}div`}>
+                <Box
+                  onClick={() => handleClick(i.id)}
+                  onKeyDown={() => handleClick(i.id)}
+                  role="button"
+                  tabIndex={0}
+                  m={1}
+                  key={`${i.id}box`}
+                >
+                  <ItineraryContainer
+                    it={i}
+                    key={i.id}
+                    sel={sel}
+                    origin={mapData.names.from!}
+                    destination={mapData.names.to!}
+                  />
+                  <Divider />
+                </Box>
+              </Collapse>
             )))}
-      </div>
-    </div>
+      </TransitionGroup>
+    </Box>
   );
 }
 
