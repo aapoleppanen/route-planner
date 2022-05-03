@@ -1,6 +1,6 @@
 import { AnyAction } from '@reduxjs/toolkit';
 import '@testing-library/jest-dom/extend-expect';
-import reducer from './mapSlice';
+import reducer from '../search/searchSlice';
 
 describe('routesSlice', () => {
   test('should return the initial state', () => {

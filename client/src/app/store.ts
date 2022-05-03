@@ -1,10 +1,10 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import mapReducer from '../features/map/mapSlice';
+import searchReducer from '../features/search/searchSlice';
 import routesReducer from '../features/routes/routesSlice';
 
 export const store = configureStore({
   reducer: {
-    map: mapReducer,
+    search: searchReducer,
     routes: routesReducer,
   },
 });

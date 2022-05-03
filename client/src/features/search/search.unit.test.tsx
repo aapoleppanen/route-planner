@@ -30,19 +30,4 @@ describe('Search unit tests', () => {
     await findByText('result');
     expect(findByText('result')).toBeDefined();
   });
-  test('getResults function gets called on backspace input', async () => {
-    let container;
-    await waitFor(async () => {
-      ({ container } = render(<Search />));
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      userEvent.type(container.querySelector('input')!, 'result');
-      await userEvent.type(
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        container.querySelector('input')!,
-        '{backspace}{backspace}',
-        { delay: 400 },
-      );
-    });
-    await waitFor(() => expect(searchForAddress).toHaveBeenCalledTimes(2));
-  });
 });

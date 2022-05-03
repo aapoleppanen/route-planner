@@ -9,10 +9,22 @@ query stop($id: String!) {
 
 # plan query
 
-query routes($from: InputCoordinates!, $to: InputCoordinates!) {
-  plan(from: $from, to: $to, numItineraries: 5) {
+query routes(
+  $from: InputCoordinates!
+  $to: InputCoordinates!
+  $date: String
+  $time: String
+  $arriveBy: Boolean
+) {
+  plan(
+    from: $from
+    to: $to
+    numItineraries: 5
+    date: $date
+    time: $time
+    arriveBy: $arriveBy
+  ) {
     itineraries {
-      walkDistance
       duration
       legs {
         route {
@@ -30,16 +42,7 @@ query routes($from: InputCoordinates!, $to: InputCoordinates!) {
             lon
             code
             name
-            gtfsId
             vehicleMode
-            stoptimesForPatterns(omitNonPickups: true, timeRange: 1800) {
-              pattern {
-                code
-              }
-              stoptimes {
-                scheduledDeparture
-              }
-            }
           }
         }
         to {
@@ -52,17 +55,10 @@ query routes($from: InputCoordinates!, $to: InputCoordinates!) {
             name
             code
             vehicleMode
-            patterns {
-              code
-            }
           }
         }
         trip {
-          gtfsId
           routeShortName
-          pattern {
-            code
-          }
           tripHeadsign
         }
         legGeometry {

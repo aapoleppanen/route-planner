@@ -4,7 +4,7 @@ import Collapse from '@mui/material/Collapse';
 import { TransitionGroup } from 'react-transition-group';
 import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { selectMapData } from '../map/mapSlice';
+import { QueryVariables, selectSearchData } from '../search/searchSlice';
 import ItineraryContainer from './ItineraryContainer';
 import {
   fetchRoutes,
@@ -20,17 +20,23 @@ function Routes() {
   const [message, setMessage] = useState<string | null>(null);
 
   const itineraries = useAppSelector(selectItinearies);
-  const mapData = useAppSelector(selectMapData);
+  const searchData = useAppSelector(selectSearchData);
   const error = useAppSelector(selectError);
 
   useEffect(() => {
-    const coords = mapData.coordinates;
+    const coords = searchData.coordinates;
     if (coords.from) {
       dispatch(setError(null));
       dispatch(selectRoute(null));
-      dispatch(fetchRoutes(coords.from, coords.to));
+      if (searchData.queryVariables) {
+        dispatch(
+          fetchRoutes(coords.from, coords.to, {
+            queryVariables: { ...searchData.queryVariables },
+          }),
+        );
+      } else dispatch(fetchRoutes(coords.from, coords.to));
     }
-  }, [mapData]);
+  }, [searchData]);
 
   useEffect(() => {
     if (sel) dispatch(selectRoute(sel));
@@ -40,7 +46,13 @@ function Routes() {
   useEffect(() => {
     if (error) {
       if (error.type === 'noData') setMessage(error.message);
-      else setMessage('Something went wrong...');
+      else if (error.type === 'location') setMessage(error.message);
+      else {
+        setMessage('Something went wrong...');
+      }
+      setTimeout(() => {
+        dispatch(setError(null));
+      }, 4000);
     } else setMessage(null);
   }, [error]);
 
@@ -48,9 +60,9 @@ function Routes() {
 
   return (
     <Box mt={2} sx={{ overflow: 'scroll' }}>
-      <TransitionGroup>
-        {message ||
-          (itineraries &&
+      {(message && <Box>{message}</Box>) || (
+        <TransitionGroup>
+          {itineraries &&
             itineraries.map((i) => (
               <Collapse key={`${i.id}div`}>
                 <Box
@@ -65,14 +77,15 @@ function Routes() {
                     it={i}
                     key={i.id}
                     sel={sel}
-                    origin={mapData.names.from!}
-                    destination={mapData.names.to!}
+                    origin={searchData.names.from!}
+                    destination={searchData.names.to!}
                   />
                   <Divider />
                 </Box>
               </Collapse>
-            )))}
-      </TransitionGroup>
+            ))}
+        </TransitionGroup>
+      )}
     </Box>
   );
 }

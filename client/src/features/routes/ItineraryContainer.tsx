@@ -80,7 +80,7 @@ function ItineraryContainer({
         <Box sx={{ opacity: 0 }}>00:00</Box>
       </Grid>
       {legs.map((leg) => (
-        <>
+        <React.Fragment key={leg?.endTime}>
           <Grid
             item
             sx={{
@@ -92,7 +92,6 @@ function ItineraryContainer({
           </Grid>
           <Grid
             item
-            key={leg?.endTime}
             sx={{
               display: 'flex',
               flexDirection: 'column',
@@ -125,7 +124,7 @@ function ItineraryContainer({
               }}
             />
           </Grid>
-        </>
+        </React.Fragment>
       ))}
       <Grid
         item
@@ -168,7 +167,7 @@ function ItineraryContainer({
   );
 
   return (
-    <Box data-testId="it_container">
+    <Box data-testid="it_container">
       <Collapse in={sel === it.id}>{handleSelected(it.legs as Leg[])}</Collapse>
       <Collapse in={sel !== it.id}>
         {handleNoSelected(it.legs as Leg[])}

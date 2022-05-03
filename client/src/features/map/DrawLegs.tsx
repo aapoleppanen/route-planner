@@ -4,7 +4,9 @@ import { Feature, GeoJsonProperties, Geometry } from 'geojson';
 import React, { useEffect, useState } from 'react';
 // eslint-disable-next-line object-curly-newline
 import { Layer, Source, useMap, Marker, MarkerProps } from 'react-map-gl';
+import { useAppDispatch } from '../../app/hooks';
 import { Leg, Maybe, Stop } from '../../graphql/graphql';
+import { error } from '../routes/routesSlice';
 import { layerStyle, modeToColor } from './mapHelper';
 
 type DrawLegsProps = {
@@ -14,6 +16,7 @@ type DrawLegsProps = {
 type MarkerPropsWithURL = MarkerProps & { url: string };
 
 export default function DrawLegs({ legs }: DrawLegsProps) {
+  const dispatch = useAppDispatch();
   const { current: map } = useMap();
 
   const initData: GeoJSON.FeatureCollection<GeoJSON.Geometry> = {
@@ -42,32 +45,38 @@ export default function DrawLegs({ legs }: DrawLegsProps) {
   });
 
   useEffect(() => {
-    if (legs) {
-      // add route lines to source layer
-      const fs: Feature<Geometry, GeoJsonProperties>[] = legs?.map((l) => ({
-        type: 'Feature',
-        properties: {
-          color: modeToColor(l?.mode as string),
-        },
-        geometry: pld.toGeoJSON(l?.legGeometry?.points),
-      }));
-      setData({
-        type: 'FeatureCollection',
-        features: fs,
-      });
-      // add markers
-      const stops = legs
-        ?.map((l) => l?.from.stop)
-        .concat(legs[legs.length - 1]?.to.stop);
-      // add origin location to the list
-      if (stops) {
-        const props = stops.filter((n) => n).map((s) => createMarkerProps(s!));
-        setMarkerprops(props);
+    try {
+      if (legs) {
+        // add route lines to source layer
+        const fs: Feature<Geometry, GeoJsonProperties>[] = legs?.map((l) => ({
+          type: 'Feature',
+          properties: {
+            color: modeToColor(l?.mode as string),
+          },
+          geometry: pld.toGeoJSON(l?.legGeometry?.points),
+        }));
+        setData({
+          type: 'FeatureCollection',
+          features: fs,
+        });
+        // add markers
+        const stops = legs
+          ?.map((l) => l?.from.stop)
+          .concat(legs[legs.length - 1]?.to.stop);
+        // add origin location to the list
+        if (stops) {
+          const props = stops
+            .filter((n) => n)
+            .map((s) => createMarkerProps(s!));
+          setMarkerprops(props);
+        }
+      } else {
+        // reset if null
+        setData(initData);
+        setMarkerprops([]);
       }
-    } else {
-      // reset if null
-      setData(initData);
-      setMarkerprops([]);
+    } catch (e) {
+      dispatch(error({ type: 'other', message: 'Could not draw legs on map' }));
     }
   }, [legs]);
 

@@ -27,7 +27,7 @@ describe('Search', function () {
     cy.get('input').type('kamppi');
     cy.wait('@searchForAddress');
     cy.get('#react-select-3-option-0', { timeout: 500 }).click();
-    cy.get('[data-testId="it_container"]').first().click();
+    cy.get('[data-testid="it_container"]').first().click();
     cy.wait('@getRoutes');
     cy.contains('Tupasaari').should('exist');
   });
@@ -48,12 +48,12 @@ describe('Map', function () {
     ).as('getRoutes');
     cy.get('input').type('kamppi');
     cy.get('#react-select-3-option-0').click();
-    cy.get('[data-testId="it_container"]').first().click();
+    cy.get('[data-testid="it_container"]').first().click();
   });
 
   it('Should render markers on map', function () {
     cy.get(
-      '[data-testId="https://raw.githubusercontent.com/HSLdevcom/hsl-map-style/master/map-icons/icon-stop-bus.svg"]',
+      '[data-testid="https://raw.githubusercontent.com/HSLdevcom/hsl-map-style/master/map-icons/icon-stop-bus.svg"]',
     ).should('exist');
   });
 });

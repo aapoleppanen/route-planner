@@ -3,10 +3,17 @@ import { v4 as uuid } from 'uuid';
 import { AppThunk, RootState } from '../../app/store';
 import { InputCoordinates, Itinerary, Plan } from '../../graphql/graphql';
 import { getRoutes } from '../../services/routes';
+import { QueryVariables } from '../search/searchSlice';
 
 export type ItineraryWithID = Itinerary & { id: string };
 
-const errorTypes = ['network', 'graphQL', 'noData', 'other'] as const;
+const errorTypes = [
+  'network',
+  'graphQL',
+  'noData',
+  'location',
+  'other',
+] as const;
 type ErrorTypesTuple = typeof errorTypes;
 export type ErrorType = ErrorTypesTuple[number];
 
@@ -87,9 +94,12 @@ export const selectItinearies = (
 
 export const fetchRoutes =
   /* prettier-ignore */
-  (from: InputCoordinates, to: InputCoordinates): AppThunk => async (dispatch) => {
+  // eslint-disable-next-line max-len
+  (from: InputCoordinates, to: InputCoordinates, variables?: QueryVariables): AppThunk => async (dispatch) => {
     try {
-      const result = await getRoutes(from, to);
+      const result = variables ?
+        await getRoutes({ from, to, variables }) :
+        await getRoutes({ from, to });
       if (result.error && result.error.message) {
         if (result.error.networkError) dispatch(error({ type: 'network', message: result.error.message }));
         if (result.error.graphQLErrors) dispatch(error({ type: 'graphQL', message: result.error.message }));
