@@ -1,13 +1,7 @@
 import Box from '@mui/material/Box';
 import { grey, purple } from '@mui/material/colors';
-import Grid from '@mui/material/Grid';
 import Icon from '@mui/material/Icon';
-import TextField from '@mui/material/TextField';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { TimePicker } from '@mui/x-date-pickers/TimePicker';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SingleValue } from 'react-select';
 import { useAppDispatch } from '../../app/hooks';
 import { SearchFeature } from '../../app/types';
@@ -15,11 +9,12 @@ import { InputCoordinates } from '../../graphql/graphql';
 import { lookUpAddress } from '../../services/search';
 import { validateCoords } from '../../services/utils';
 import { error } from '../routes/routesSlice';
+import SearchDateTimePicker from './SearchDateTimePicker';
 import SearchSelect from './SearchSelect';
 import {
-  setSearchQueryNoVariables,
   setFromName,
   setSearchQuery,
+  setSearchQueryNoVariables,
 } from './searchSlice';
 
 function Search() {
@@ -28,6 +23,8 @@ function Search() {
   const [usingLocation, setUsingLocation] = useState<boolean>(false);
   const [date, setDate] = useState<Date | null>(new Date());
   const [time, setTime] = useState<Date | null>(new Date());
+  /* departBy = false, arriveBy = true */
+  const [arriveBy, setArriveBy] = useState<boolean>(false);
 
   const handleChange = (value: SingleValue<SearchFeature>) => {
     try {
@@ -47,7 +44,7 @@ function Search() {
         dispatch(
           setSearchQuery({
             coords,
-            queryVariables: { arriveBy: false, date: d, time: t },
+            queryVariables: { arriveBy, date: d, time: t },
           }),
         );
       } else {
@@ -84,6 +81,10 @@ function Search() {
     );
   };
 
+  useEffect(() => {
+    if (selected) handleChange(selected);
+  }, [date, time, arriveBy]);
+
   return (
     <Box>
       <Box sx={{ display: 'flex' }}>
@@ -107,31 +108,14 @@ function Search() {
         </Icon>
       </Box>
       <Box>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <Grid container>
-            <Grid item>
-              <DatePicker
-                label="Date"
-                value={date}
-                onChange={(newValue) => {
-                  setDate(newValue);
-                }}
-                renderInput={(params) => <TextField {...params} />}
-              />
-            </Grid>
-            <Grid item>
-              <TimePicker
-                label="Time"
-                ampm={false}
-                value={time}
-                onChange={(newValue) => {
-                  setTime(newValue);
-                }}
-                renderInput={(params) => <TextField {...params} />}
-              />
-            </Grid>
-          </Grid>
-        </LocalizationProvider>
+        <SearchDateTimePicker
+          date={date}
+          time={time}
+          arriveBy={arriveBy}
+          setDate={setDate}
+          setTime={setTime}
+          setArriveBy={setArriveBy}
+        />
       </Box>
     </Box>
   );

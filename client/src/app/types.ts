@@ -1,5 +1,3 @@
-import { InputCoordinates } from '../graphql/graphql';
-
 export type SearchFeature = {
   properties: {
     id: string;

@@ -14,6 +14,8 @@ import search_response from './mocks/search_response.json';
 import routes_response_no_itineraries from './mocks/routes_response_no_itineraries.json';
 import { render } from './test_utils';
 
+/* this test needs to have flag --runInBand due to msw usage */
+
 const handlers = [
   rest.get('http://api.digitransit.fi/geocoding/v1/:params', (req, res, ctx) =>
     res(ctx.json(search_response)),

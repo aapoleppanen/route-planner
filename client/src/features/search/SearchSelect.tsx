@@ -44,6 +44,10 @@ function SearchSelect({
         DropdownIndicator: () => null,
         IndicatorSeparator: () => null,
       }}
+      styles={{
+        menuPortal: (provided) => ({ ...provided, zIndex: 10 }),
+        menu: (provided) => ({ ...provided, zIndex: 10 }),
+      }}
     />
   );
 }

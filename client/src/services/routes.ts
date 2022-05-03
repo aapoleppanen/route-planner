@@ -34,8 +34,3 @@ export const getRoutes = async ({
 };
 
 export default {};
-
-// const { data, fetching, error } = result;
-
-// if (fetching) return <p>Loading...</p>;
-// if (error) return <p>Oh no... {error.message}</p>;

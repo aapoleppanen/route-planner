@@ -26,4 +26,8 @@
     "src",
     "./src/tests/**/*",
   ],
+  // "exclude": [
+  //   "src/**/*.test.ts",
+  //   "src/**/*.test.tsx"
+  // ]
 }

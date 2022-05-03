@@ -1,12 +1,3 @@
-# query to get stops
-query stop($id: String!) {
-  stop(id: $id) {
-    name
-    lat
-    lon
-  }
-}
-
 # plan query
 
 query routes(
