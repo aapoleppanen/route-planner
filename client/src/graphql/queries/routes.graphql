@@ -1,5 +1,4 @@
 # query to get stops
-
 query stop($id: String!) {
   stop(id: $id) {
     name
@@ -9,9 +8,6 @@ query stop($id: String!) {
 }
 
 # plan query
-
-# { lat: 60.19775, lon: 24.94053 }
-# { lat: 60.18840, lon: 25.00744 }
 
 query routes($from: InputCoordinates!, $to: InputCoordinates!) {
   plan(from: $from, to: $to, numItineraries: 5) {
@@ -54,6 +50,7 @@ query routes($from: InputCoordinates!, $to: InputCoordinates!) {
             lat
             lon
             name
+            code
             vehicleMode
             patterns {
               code

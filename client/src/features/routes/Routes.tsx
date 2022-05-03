@@ -47,7 +47,7 @@ function Routes() {
   const handleClick = (id: string) => setSel(sel === id ? '' : id);
 
   return (
-    <Box mt={2}>
+    <Box mt={2} sx={{ overflow: 'scroll' }}>
       <TransitionGroup>
         {message ||
           (itineraries &&
