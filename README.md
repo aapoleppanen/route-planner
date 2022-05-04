@@ -2,6 +2,8 @@
 
 A simple route-planner from your location to Maria 01.
 
+[Demo](https://aapoleppanen.github.io/route-planner/)
+
 ## Technologies used
 
 - React + Redux
