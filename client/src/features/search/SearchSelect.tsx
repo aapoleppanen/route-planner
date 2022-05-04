@@ -23,10 +23,7 @@ function SearchSelect({
     searchForAddress(text)
       .then((res) => callback(res.features))
       .catch(
-        (e) =>
-          // eslint-disable-next-line implicit-arrow-linebreak
-          dispatch(error({ type: 'other', message: 'Search failed...' })),
-        // eslint-disable-next-line function-paren-newline
+        () => dispatch(error({ type: 'other', message: 'Search failed...' })),
       );
   };
 

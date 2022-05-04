@@ -12,14 +12,14 @@ function App() {
         <Box
           p={2}
           sx={{ display: 'flex', overflow: 'hidden', flexDirection: 'column' }}
-          height={{ xs: '50vh', md: '100vh' }}
+          height={{ xs: '70vh', md: '100vh' }}
         >
           <h1>Route-Planner</h1>
           <Search />
           <Routes />
         </Box>
       </Grid>
-      <Grid item xs={12} md={8} height={{ xs: '50vh', md: '100vh' }}>
+      <Grid item xs={12} md={8} height={{ xs: '30vh', md: '100vh' }}>
         <Map />
       </Grid>
     </Grid>

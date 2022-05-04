@@ -1,40 +1,39 @@
-import { generateStyle } from 'hsl-map-style';
 import { LayerProps } from 'react-map-gl';
 
-export const style: mapboxgl.Style = generateStyle({
-  sourcesUrl: 'https://cdn.digitransit.fi/',
-  components: {
-    // Set each layer you want to include to true
+// used to generate style.json
+// export const style: mapboxgl.Style = generateStyle({
+//   sourcesUrl: 'https://cdn.digitransit.fi/',
+//   components: {
+//     // Set each layer you want to include to true
 
-    // Styles
-    base: { enabled: true }, // Enabled by default
-    municipal_borders: { enabled: false },
-    routes: { enabled: false },
-    text: { enabled: true }, // Enabled by default
-    subway_entrance: { enabled: false },
-    poi: { enabled: false },
-    park_and_ride: { enabled: false },
-    ticket_sales: { enabled: false },
-    stops: { enabled: false },
-    citybikes: { enabled: false },
-    ticket_zones: { enabled: false },
+//     // Styles
+//     base: { enabled: true }, // Enabled by default
+//     municipal_borders: { enabled: false },
+//     routes: { enabled: false },
+//     text: { enabled: true }, // Enabled by default
+//     subway_entrance: { enabled: false },
+//     poi: { enabled: false },
+//     park_and_ride: { enabled: false },
+//     ticket_sales: { enabled: false },
+//     stops: { enabled: false },
+//     citybikes: { enabled: false },
+//     ticket_zones: { enabled: false },
 
-    // Themes
-    text_sv: { enabled: false },
-    text_fisv: { enabled: false },
-    regular_routes: { enabled: false },
-    near_bus_routes: { enabled: false },
-    regular_stops: { enabled: false },
-    near_bus_stops: { enabled: false },
-    print: { enabled: false },
-    greyscale: { enabled: false },
-    simplified: { enabled: false },
-    '3d': { enabled: false },
-  },
+//     // Themes
+//     text_sv: { enabled: false },
+//     text_fisv: { enabled: false },
+//     regular_routes: { enabled: false },
+//     near_bus_routes: { enabled: false },
+//     regular_stops: { enabled: false },
+//     near_bus_stops: { enabled: false },
+//     print: { enabled: false },
+//     greyscale: { enabled: false },
+//     simplified: { enabled: false },
+//     '3d': { enabled: false },
+//   },
 
-  // optional property to show only listed routes by jore id
-  routeFilter: [],
-});
+//   routeFilter: [],
+// });
 
 export const modeToColor = (mode: string) => {
   switch (mode) {

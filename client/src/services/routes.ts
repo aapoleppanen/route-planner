@@ -23,14 +23,10 @@ export const getRoutes = async ({
   to: InputCoordinates;
   variables?: QueryVariables;
 }) => {
-  if (variables) {
-    const result = await client
-      .query(RoutesDocument, { from, to, ...variables.queryVariables })
-      .toPromise();
-    return result;
-  }
-  const result = await client.query(RoutesDocument, { from, to }).toPromise();
-  return result;
+  if (!variables) return client.query(RoutesDocument, { from, to }).toPromise();
+  return client
+    .query(RoutesDocument, { from, to, ...variables.queryVariables })
+    .toPromise();
 };
 
 export default {};

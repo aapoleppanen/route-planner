@@ -1,6 +1,7 @@
 {
   "name": "route-planner",
   "version": "0.1.0",
+  "homepage": "https://aapoleppanen.github.io/route-planner",
   "private": true,
   "dependencies": {
     "@date-io/dayjs": "^2.13.1",
@@ -19,7 +20,6 @@
     "@types/react-redux": "^7.1.24",
     "dayjs": "^1.11.1",
     "graphql": "^16.3.0",
-    "hsl-map-style": "github:HSLdevcom/hsl-map-style",
     "lodash": "^4.17.21",
     "mapbox-gl": "^2.8.1",
     "mapbox-gl-leaflet": "^0.0.15",
@@ -40,14 +40,20 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "generate": "graphql-codegen --config codegen.yml",
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {},
   "browserslist": {
     "production": [
       ">0.2%",
       "not dead",
-      "not op_mini all"
+      "not op_mini all",
+      "not ie 11",
+      "not chrome < 51",
+      "not safari < 10",
+      "not android < 51"
     ],
     "development": [
       "last 1 chrome version",
@@ -76,7 +82,8 @@
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-react-hooks": "^4.4.0",
-    "msw": "^0.39.2"
+    "msw": "^0.39.2",
+    "hsl-map-style": "github:HSLdevcom/hsl-map-style"
   },
   "msw": {
     "workerDirectory": "public"

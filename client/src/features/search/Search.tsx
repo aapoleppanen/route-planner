@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box';
 import { grey, purple } from '@mui/material/colors';
 import Icon from '@mui/material/Icon';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SingleValue } from 'react-select';
 import { useAppDispatch } from '../../app/hooks';
 import { SearchFeature } from '../../app/types';
@@ -23,33 +23,33 @@ function Search() {
   const [usingLocation, setUsingLocation] = useState<boolean>(false);
   const [date, setDate] = useState<Date | null>(new Date());
   const [time, setTime] = useState<Date | null>(new Date());
-  /* departBy = false, arriveBy = true */
+  // departBy = false, arriveBy = true, default to false
   const [arriveBy, setArriveBy] = useState<boolean>(false);
 
   const handleChange = (value: SingleValue<SearchFeature>) => {
     try {
+      if (!value) return;
       setSelected(value);
       setUsingLocation(false);
       const coords: InputCoordinates = {
         lat: value?.geometry.coordinates[1] as number,
         lon: value?.geometry.coordinates[0] as number,
       };
-      if (!validateCoords(coords)) {
-        throw new Error();
-      }
-      dispatch(setFromName(value!.properties.name));
-      if (time && date) {
-        const t = new Date(time).toLocaleTimeString();
-        const d = date.toISOString().substring(0, 10);
-        dispatch(
-          setSearchQuery({
-            coords,
-            queryVariables: { arriveBy, date: d, time: t },
-          }),
-        );
-      } else {
+      if (!validateCoords(coords)) throw new Error();
+      dispatch(setFromName(value.properties.name));
+      if (!(time && date)) {
         dispatch(setSearchQueryNoVariables(coords));
+        return;
       }
+      // format date and time, to YYYY-MM-DD & hh:mm:ss
+      const t = new Date(time).toLocaleTimeString();
+      const d = date.toISOString().substring(0, 10);
+      dispatch(
+        setSearchQuery({
+          coords,
+          queryVariables: { arriveBy, date: d, time: t },
+        }),
+      );
     } catch (e) {
       dispatch(error({ type: 'other', message: 'Invalid Coordinates' }));
     }
@@ -63,6 +63,7 @@ function Search() {
             lat: pos.coords.latitude,
             lon: pos.coords.longitude,
           };
+          // lookUpAddress throws error on invalid coordinates
           const res = await lookUpAddress(coords);
           handleChange(res.features[0]);
           setUsingLocation(true);
@@ -70,14 +71,13 @@ function Search() {
           dispatch(error({ type: 'other', message: 'Invalid Coordinates' }));
         }
       },
-      (e) =>
-        // eslint-disable-next-line implicit-arrow-linebreak
-        dispatch(
-          error({
-            type: 'location',
-            message: 'Location permission not given.',
-          }),
-        ),
+      // if no permission is given dispatch an error
+      () => dispatch(
+        error({
+          type: 'location',
+          message: 'Location permission not given.',
+        }),
+      ),
     );
   };
 

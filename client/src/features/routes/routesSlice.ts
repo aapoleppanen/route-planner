@@ -46,35 +46,15 @@ export const routesSlice = createSlice({
     },
     error: (state, action: PayloadAction<SimplifiedError | null>) => {
       if (action.payload) {
-        /* prettier-ignore */
-        if (errorTypes.includes(action.payload.type)) state.error = action.payload;
-        else state.error = { ...action.payload, type: 'other' };
+        if (errorTypes.includes(action.payload.type)) {
+          state.error = action.payload;
+        } else state.error = { ...action.payload, type: 'other' };
       } else state.error = action.payload;
     },
   },
 });
 
 export const { add, error, select } = routesSlice.actions;
-
-export const selectGeometry = (state: RootState) => {
-  if (state.routes.selected) {
-    const it = state.routes.itineraries.find(
-      (i) => i.id === state.routes.selected,
-    );
-    if (it) return it.legs.map((l) => l?.legGeometry?.points);
-  }
-  return null;
-};
-
-export const selectLegs = (state: RootState) => {
-  if (state.routes.selected) {
-    const it = state.routes.itineraries.find(
-      (i) => i.id === state.routes.selected,
-    );
-    if (it) return it.legs;
-  }
-  return null;
-};
 
 export const selectCurrentItinerary = (state: RootState) => {
   if (state.routes.selected) {
@@ -86,6 +66,18 @@ export const selectCurrentItinerary = (state: RootState) => {
   return null;
 };
 
+export const selectLegs = (state: RootState) => {
+  const it = selectCurrentItinerary(state);
+  if (it) return it.legs;
+  return null;
+};
+
+export const selectGeometry = (state: RootState) => {
+  const it = selectCurrentItinerary(state);
+  if (it) return it.legs.map((l) => l?.legGeometry?.points);
+  return null;
+};
+
 export const selectError = (state: RootState) => state.routes.error;
 
 export const selectItinearies = (
@@ -93,21 +85,30 @@ export const selectItinearies = (
 ): ItineraryWithID[] | undefined | null => state.routes.itineraries;
 
 export const fetchRoutes =
-  /* prettier-ignore */
-  // eslint-disable-next-line max-len
-  (from: InputCoordinates, to: InputCoordinates, variables?: QueryVariables): AppThunk => async (dispatch) => {
+  (
+    from: InputCoordinates,
+    to: InputCoordinates,
+    variables?: QueryVariables,
+  ): AppThunk => async (dispatch) => {
     try {
       const result = variables ?
         await getRoutes({ from, to, variables }) :
         await getRoutes({ from, to });
+      // handle network related errors
       if (result.error && result.error.message) {
-        if (result.error.networkError) dispatch(error({ type: 'network', message: result.error.message }));
-        if (result.error.graphQLErrors) dispatch(error({ type: 'graphQL', message: result.error.message }));
+        if (result.error.networkError) { dispatch(error({ type: 'network', message: result.error.message })); }
+        if (result.error.graphQLErrors) { dispatch(error({ type: 'graphQL', message: result.error.message })); }
+      // handle data
       } else if (result.data?.plan) {
-        if (result.data?.plan.itineraries.length > 0) dispatch(add(result.data.plan as Plan));
-        else dispatch(error({ type: 'noData', message: 'No routes found...' }));
-      } else dispatch(error({ type: 'other', message: 'Something went wrong...' }));
-    } catch (e) { dispatch(error({ type: 'other', message: 'Something went wrong...' })); }
+        if (result.data?.plan.itineraries.length > 0) {
+          dispatch(add(result.data.plan as Plan));
+          // handle data related errors
+        } else dispatch(error({ type: 'noData', message: 'No routes found...' }));
+      } else { dispatch(error({ type: 'other', message: 'Something went wrong...' })); }
+      // handle unknown/sudden errors
+    } catch (e) {
+      dispatch(error({ type: 'other', message: 'Something went wrong...' }));
+    }
   };
 
 export default routesSlice.reducer;

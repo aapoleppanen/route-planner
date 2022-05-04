@@ -1,9 +1,9 @@
 import { createClient } from 'urql';
-import { API_URL } from './config';
+import URLS from './config';
 
 // create graphql client
 const client = createClient({
-  url: API_URL,
+  url: URLS.GRAPHQL_URL,
 });
 
 export default client;

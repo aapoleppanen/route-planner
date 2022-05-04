@@ -1,11 +1,12 @@
 import Box from '@mui/material/Box';
+import Collapse from '@mui/material/Collapse';
+import {
+  blue, green, grey, orange,
+} from '@mui/material/colors';
+import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
 import Icon from '@mui/material/Icon';
-import Divider from '@mui/material/Divider';
-import Collapse from '@mui/material/Collapse';
-// eslint-disable-next-line object-curly-newline
-import { green, blue, orange, grey } from '@mui/material/colors';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Leg } from '../../graphql/graphql';
 import { ItineraryWithID } from './routesSlice';
 
@@ -20,8 +21,6 @@ function ItineraryContainer({
   origin: string;
   destination: string;
 }) {
-  useEffect(() => {}, [sel]);
-
   const icons: Record<string, JSX.Element> = {
     WALK: <Icon>directions_walk</Icon>,
     TRAM: <Icon sx={{ color: green[500] }}>tram</Icon>,
@@ -30,24 +29,20 @@ function ItineraryContainer({
     DEFAULT: <Icon>directions_walk</Icon>,
   };
 
-  const timeDiff = (leg: Leg): number =>
-    // eslint-disable-next-line implicit-arrow-linebreak
-    Math.floor(
-      (new Date(leg?.endTime).valueOf() - new Date(leg?.startTime).valueOf()) /
+  const timeDiff = (leg: Leg): number => Math.floor(
+    (new Date(leg?.endTime).valueOf() - new Date(leg?.startTime).valueOf()) /
         1000 /
         60,
-    );
+  );
 
-  const formatTime = (time: number) =>
-    // eslint-disable-next-line implicit-arrow-linebreak
-    new Date(time).toLocaleTimeString([], {
-      hour: '2-digit',
-      minute: '2-digit',
-    });
+  const formatTime = (time: number) => new Date(time).toLocaleTimeString([], {
+    hour: '2-digit',
+    minute: '2-digit',
+  });
 
   const getRouteName = (leg: Leg): string => {
-    if (leg.trip?.routeShortName) return leg.trip.routeShortName;
-    return '';
+    if (!leg.trip?.routeShortName) return '';
+    return leg.trip.routeShortName;
   };
 
   const formatStop = (leg: Leg): string | JSX.Element => {
@@ -59,6 +54,7 @@ function ItineraryContainer({
           <Box sx={{ flexGrow: 1, textAlign: 'center' }}>
             {leg.from.name} {leg.from.stop.code}
           </Box>
+          {/* invisible box to truly center, central box */}
           <Box sx={{ opacity: 0 }}>00:00</Box>
         </>
       );
@@ -109,7 +105,7 @@ function ItineraryContainer({
             />
             <Box sx={{ display: 'flex', alignItems: 'center' }} mb={2} mt={2}>
               <Box sx={{ display: 'flex', flexDirection: 'column' }} mr={2}>
-                {icons[leg.mode!] || icons.DEFAULT}
+                {leg.mode ? icons[leg.mode] : icons.DEFAULT}
                 {getRouteName(leg)}
               </Box>
               {timeDiff(leg)} min
@@ -155,7 +151,7 @@ function ItineraryContainer({
               alignItems: 'center',
             }}
           >
-            {icons[leg.mode!] || icons.DEFAULT}
+            {leg.mode ? icons[leg.mode] : icons.DEFAULT}
             {leg.mode === 'WALK' ? <>{timeDiff(leg)} min</> : getRouteName(leg)}
           </Box>
         </Grid>

@@ -1,15 +1,15 @@
 import Box from '@mui/material/Box';
-import Divider from '@mui/material/Divider';
 import Collapse from '@mui/material/Collapse';
-import { TransitionGroup } from 'react-transition-group';
+import Divider from '@mui/material/Divider';
 import React, { useEffect, useState } from 'react';
+import { TransitionGroup } from 'react-transition-group';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { QueryVariables, selectSearchData } from '../search/searchSlice';
+import { selectSearchData } from '../search/searchSlice';
 import ItineraryContainer from './ItineraryContainer';
 import {
+  error as setError,
   fetchRoutes,
   select as selectRoute,
-  error as setError,
   selectError,
   selectItinearies,
 } from './routesSlice';
@@ -25,17 +25,20 @@ function Routes() {
 
   useEffect(() => {
     const coords = searchData.coordinates;
-    if (coords.from) {
-      dispatch(setError(null));
-      dispatch(selectRoute(null));
-      if (searchData.queryVariables) {
-        dispatch(
-          fetchRoutes(coords.from, coords.to, {
-            queryVariables: { ...searchData.queryVariables },
-          }),
-        );
-      } else dispatch(fetchRoutes(coords.from, coords.to));
+    if (!coords.from) return;
+    dispatch(setError(null));
+    dispatch(selectRoute(null));
+    // if no variables are defined dispatch w/o them
+    if (!searchData.queryVariables) {
+      dispatch(fetchRoutes(coords.from, coords.to));
+      return;
     }
+    // else dispatch w/ variables
+    dispatch(
+      fetchRoutes(coords.from, coords.to, {
+        queryVariables: { ...searchData.queryVariables },
+      }),
+    );
   }, [searchData]);
 
   useEffect(() => {
@@ -44,16 +47,19 @@ function Routes() {
   }, [sel]);
 
   useEffect(() => {
-    if (error) {
-      if (error.type === 'noData') setMessage(error.message);
-      else if (error.type === 'location') setMessage(error.message);
-      else {
-        setMessage('Something went wrong...');
-      }
-      setTimeout(() => {
-        dispatch(setError(null));
-      }, 4000);
-    } else setMessage(null);
+    if (!error) {
+      setMessage(null);
+      return;
+    }
+    // clear the error msg after 4s
+    setTimeout(() => {
+      dispatch(setError(null));
+    }, 4000);
+    if (error.type === 'noData' || error.type === 'location') {
+      setMessage(error.message);
+      return;
+    }
+    setMessage('Something went wrong...');
   }, [error]);
 
   const handleClick = (id: string) => setSel(sel === id ? '' : id);
@@ -77,8 +83,12 @@ function Routes() {
                     it={i}
                     key={i.id}
                     sel={sel}
-                    origin={searchData.names.from!}
-                    destination={searchData.names.to!}
+                    origin={
+                      searchData.names.from ? searchData.names.from : 'origin'
+                    }
+                    destination={
+                      searchData.names.to ? searchData.names.to : 'destination'
+                    }
                   />
                   <Divider />
                 </Box>

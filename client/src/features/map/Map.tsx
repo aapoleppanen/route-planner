@@ -1,11 +1,10 @@
 import React, { useMemo } from 'react';
 import Map from 'react-map-gl';
 import { useAppSelector } from '../../app/hooks';
-// import style from '../../assets/style.json';
 import { selectLegs } from '../routes/routesSlice';
 import DrawLegs from './DrawLegs';
-import { style } from './mapHelper';
 import './mapStyle.css';
+import style from './style.json';
 
 const accessToken = process.env.REACT_APP_MAPBOX_PUBLIC_TOKEN;
 
@@ -24,8 +23,7 @@ function MapContainer() {
       reuseMaps
       style={{ width: 'auto', height: '100%' }}
       mapboxAccessToken={accessToken}
-      // mapStyle="https://dev-api.digitransit.fi/map/v2/hsl-vector-map/index.json"
-      mapStyle={style}
+      mapStyle={style as import('mapbox-gl').Style}
       id="main-map"
     >
       {layers}

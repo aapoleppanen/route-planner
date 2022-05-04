@@ -3,7 +3,7 @@ import bbox from '@turf/bbox';
 import { Feature, GeoJsonProperties, Geometry } from 'geojson';
 import React, { useEffect, useState } from 'react';
 // eslint-disable-next-line object-curly-newline
-import { Layer, Source, useMap, Marker, MarkerProps } from 'react-map-gl';
+import { Layer, Marker, MarkerProps, Source, useMap } from 'react-map-gl';
 import { useAppDispatch } from '../../app/hooks';
 import { Leg, Maybe, Stop } from '../../graphql/graphql';
 import { error } from '../routes/routesSlice';
@@ -35,14 +35,21 @@ export default function DrawLegs({ legs }: DrawLegsProps) {
       'https://raw.githubusercontent.com/HSLdevcom/hsl-map-style/master/map-icons/icon-entrance-subway.svg',
     BUS: 'https://raw.githubusercontent.com/HSLdevcom/hsl-map-style/master/map-icons/icon-stop-bus.svg',
     DEFAULT:
-      'https://icons-for-free.com/download-icon-map+marker+icon-1320166582858325800_512.png',
+      'https://icons-for-free.com/iconfiles/png/512/map+marker+icon-1320166582858325800.png',
   };
 
-  const createMarkerProps = (stop: Stop): MarkerPropsWithURL => ({
-    longitude: stop.lon!,
-    latitude: stop.lat!,
-    url: imgUrls[stop.vehicleMode!] || imgUrls.DEFAULT,
-  });
+  const createMarkerProps = (
+    stop: Maybe<Stop> | undefined,
+  ): MarkerPropsWithURL | null => {
+    if (stop && stop.lon && stop.lat) {
+      return {
+        longitude: stop.lon,
+        latitude: stop.lat,
+        url: stop.vehicleMode ? imgUrls[stop.vehicleMode] : imgUrls.DEFAULT,
+      };
+    }
+    return null;
+  };
 
   useEffect(() => {
     try {
@@ -65,10 +72,8 @@ export default function DrawLegs({ legs }: DrawLegsProps) {
           .concat(legs[legs.length - 1]?.to.stop);
         // add origin location to the list
         if (stops) {
-          const props = stops
-            .filter((n) => n)
-            .map((s) => createMarkerProps(s!));
-          setMarkerprops(props);
+          const props = stops.map((s) => createMarkerProps(s)).filter(Boolean);
+          setMarkerprops(props as MarkerPropsWithURL[]);
         }
       } else {
         // reset if null
@@ -83,7 +88,7 @@ export default function DrawLegs({ legs }: DrawLegsProps) {
   useEffect(() => {
     if (data.features.length > 0 && map) {
       const [minLon, minLat, maxLon, maxLat] = bbox(data);
-      map.fitBounds([minLon, minLat, maxLon, maxLat], { padding: 20 });
+      map.fitBounds([minLon, minLat, maxLon, maxLat], { padding: 30 });
     }
   }, [data]);
 
