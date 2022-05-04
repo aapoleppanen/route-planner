@@ -1,7 +1,7 @@
 import { useQuery } from 'urql';
 import { InputCoordinates, RoutesDocument } from '../graphql/graphql';
 import client from '../app/client';
-import { QueryVariables } from '../features/search/searchSlice';
+import type { QueryVariables } from '../features/search/searchSlice';
 
 export const useRoute = (from: InputCoordinates, to: InputCoordinates) => {
   const [result] = useQuery({

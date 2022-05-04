@@ -1,6 +1,7 @@
 import Box from '@mui/material/Box';
 import { grey, purple } from '@mui/material/colors';
 import Icon from '@mui/material/Icon';
+import debounce from 'lodash/debounce';
 import React, { useEffect, useState } from 'react';
 import { SingleValue } from 'react-select';
 import { useAppDispatch } from '../../app/hooks';
@@ -81,6 +82,11 @@ function Search() {
     );
   };
 
+  const dbTime = 500;
+  const debouncedSetDate = debounce(setDate, dbTime);
+  const debouncedSetTime = debounce(setTime, dbTime);
+  const debouncedSetArriveBy = debounce(setArriveBy, dbTime);
+
   useEffect(() => {
     if (selected) handleChange(selected);
   }, [date, time, arriveBy]);
@@ -112,9 +118,9 @@ function Search() {
           date={date}
           time={time}
           arriveBy={arriveBy}
-          setDate={setDate}
-          setTime={setTime}
-          setArriveBy={setArriveBy}
+          setDate={debouncedSetDate}
+          setTime={debouncedSetTime}
+          setArriveBy={debouncedSetArriveBy}
         />
       </Box>
     </Box>

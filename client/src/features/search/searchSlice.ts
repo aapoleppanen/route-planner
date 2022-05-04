@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '../../app/store';
+import { createSlice, PayloadAction, Reducer } from '@reduxjs/toolkit';
+import type { RootState } from '../../app/store';
 import { InputCoordinates } from '../../graphql/graphql';
 
 export type QueryVariables = {
@@ -62,4 +62,4 @@ export const { setSearchQueryNoVariables, setFromName, setSearchQuery } =
 
 export const selectSearchData = (state: RootState) => state.search;
 
-export default searchSlice.reducer;
+export default searchSlice.reducer as Reducer<SearchState>;

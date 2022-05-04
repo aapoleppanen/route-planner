@@ -27,7 +27,6 @@ module.exports = {
     'comma-dangle': ['error', 'always-multiline'],
     '@typescript-eslint/indent': 'off',
     indent: ['error', 2, { SwitchCase: 1 }],
-    'import/no-cycle': 'off',
     'react/jsx-one-expression-per-line': 'off',
     'react/jsx-props-no-spreading': 'off',
     'operator-linebreak': ['warn', 'after'],

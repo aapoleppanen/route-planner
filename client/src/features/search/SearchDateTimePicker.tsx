@@ -32,6 +32,7 @@ function SearchDateTimePicker({
             <Select
               labelId="select-arrival"
               id="select-arrival-id"
+              data-testid="select_arrival"
               value={select}
               label=""
               onChange={(e) => {

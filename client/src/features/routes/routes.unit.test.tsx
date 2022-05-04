@@ -821,7 +821,7 @@ describe('routesSlice', () => {
 
   test('should accept only predefined error values', () => {
     expect(
-      /* @ts-ignore */
+      // @ts-expect-error ts(2322)
       reducer(undefined, error({ type: 'networkError', message: 'example' })),
     ).toEqual({
       itineraries: [],

@@ -1,9 +1,9 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction, Reducer } from '@reduxjs/toolkit';
 import { v4 as uuid } from 'uuid';
-import { AppThunk, RootState } from '../../app/store';
+import type { AppThunk, RootState } from '../../app/store';
 import { InputCoordinates, Itinerary, Plan } from '../../graphql/graphql';
 import { getRoutes } from '../../services/routes';
-import { QueryVariables } from '../search/searchSlice';
+import type { QueryVariables } from '../search/searchSlice';
 
 export type ItineraryWithID = Itinerary & { id: string };
 
@@ -111,4 +111,4 @@ export const fetchRoutes =
     }
   };
 
-export default routesSlice.reducer;
+export default routesSlice.reducer as Reducer<RoutesState>;

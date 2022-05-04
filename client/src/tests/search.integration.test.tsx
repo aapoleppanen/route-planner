@@ -17,7 +17,7 @@ import { render } from './test_utils';
 /* this test needs to have flag --runInBand due to msw usage */
 
 const handlers = [
-  rest.get('http://api.digitransit.fi/geocoding/v1/:params', (req, res, ctx) =>
+  rest.get('https://api.digitransit.fi/geocoding/v1/:params', (req, res, ctx) =>
     res(ctx.json(search_response)),
   ),
   graphql.query('routes', (req, res, ctx) => {
@@ -40,20 +40,22 @@ afterAll(() => server.close());
 
 describe('search integration tests', () => {
   test('should render options and they should be selectable', async () => {
-    const { container, findByText, getByText, findAllByText } = render(
+    const { container, findByText, findAllByText } = render(
       <>
         <Search />
         <Routes />
       </>,
     );
     if (!container || !findByText) throw new Error('Render failed...');
+    const searchBox = container.querySelector('input');
+    if (!searchBox) throw new Error('No search box found...');
     await waitFor(() => {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      userEvent.type(container.querySelector('input')!, 'kamppi');
+      userEvent.type(searchBox, 'kamppi');
     });
-    expect(await findByText('Kamppi, Kampinkuja 1, Helsinki')).toBeDefined();
+    const searchOption = await findByText('Kamppi, Kampinkuja 1, Helsinki');
+    expect(searchOption).toBeDefined();
     await waitFor(() => {
-      userEvent.click(getByText('Kamppi, Kampinkuja 1, Helsinki'));
+      userEvent.click(searchOption);
     });
     expect(await findAllByText(/Pasilan asema/)).toBeDefined();
   });
@@ -66,9 +68,10 @@ describe('search integration tests', () => {
       </>,
     );
     if (!container || !findAllByText) throw new Error('Render failed...');
+    const searchBox = container.querySelector('input');
+    if (!searchBox) throw new Error('No search box found...');
     await waitFor(() => {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      userEvent.type(container.querySelector('input')!, 'kamppi');
+      userEvent.type(searchBox, 'kamppi');
     });
     expect(await findAllByText('Kamppi, Helsinki')).toBeDefined();
     await waitFor(() => {
